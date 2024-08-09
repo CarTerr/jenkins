@@ -8,7 +8,10 @@ pipeline {
         stage('Deploy test') {
             steps {
                 script {
-                    ls -la
+                     sshagent(credentials : ['ubuntu-antony']) {
+                         sh "echo pwd"
+                         sh 'ssh -t -t antony@192.168.0.199 -o StrictHostKeyChecking=no "echo pwd && ls -la"'
+                    }
                 }
             }
         }
